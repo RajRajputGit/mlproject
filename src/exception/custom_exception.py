@@ -1,5 +1,5 @@
 import sys
-
+from src.logger import logging # <--- Import your newly created logger
 def error_message_detail(error, error_detail:sys):
     # This extracts the file name and line number where the error occurred
     _, _, exc_tb = error_detail.exc_info()
@@ -13,6 +13,7 @@ class CustomException(Exception):
     def __init__(self, error_message, error_detail:sys):
         super().__init__(error_message)
         self.error_message = error_message_detail(error_message, error_detail=error_detail)
-    
+    # AUTOMATIC SYNC: Every time this exception is raised, it writes to the log file
+        logging.error(self.error_message)
     def __str__(self):
         return self.error_message

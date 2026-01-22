@@ -1,12 +1,12 @@
-from logger import logging
-from src.exception.custom_exception import CustomException
 import sys
+# IMPORTANT: Import your local logger first to trigger the config
+from src.logger import logging 
+from src.exception.custom_exception import CustomException
 
-if __name__ == "__main__":
+if __name__=="__main__":
     try:
-        logging.info("Attempting a risky operation...")
-        result = 10 / 0  # This will trigger an error
+        logging.info("Logging has started successfully!") # Test message
+        a = 1 / 0
     except Exception as e:
-        logging.info("Divide by Zero Error detected")
-        # Raising the custom exception which provides the file and line number
-        raise CustomException(e, sys)
+        # This will trigger the logging inside CustomException
+        raise CustomException(e, sys) from None
